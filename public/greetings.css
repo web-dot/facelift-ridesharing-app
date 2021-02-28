@@ -11,3 +11,11 @@ p{
 	color: #f9ca24;
 	text-align: center;
 }
+.button{
+    width: 30%;
+	margin: 0 auto;
+    background:#f9ca24; 
+	border-radius: 10px;
+    color: #ffffff;
+    font-size: 50px;
+}
