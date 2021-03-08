@@ -46,16 +46,32 @@
 
                   //control set
                   map.addControl(L.mapquest.control({ position: 'bottomright' }));
-                    //var pointA = document.getElementById('start').value;
-                    //var pointB = document.getElementById('end').value;
-                    $("form").submit(function(e){
-                    //var qString = $(this).serialize();
-                    var pointA = document.getElementById('start').value;
-                    var pointB = document.getElementById('end').value;
-                    var qString = `http://www.mapquestapi.com/directions/v2/route?key=AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk&from=${pointA}&to=${pointB}`
-                console.log(qString);
-                e.preventDefault();
-                })
+                      
+                    var form = document.querySelector('form');
+                    form.addEventListener('submit', function(e){
+                         function reqListener () {
+                        console.log(this.responseText);
+                        }
+                
+                        var oReq = new XMLHttpRequest();
+                        oReq.addEventListener("load", reqListener);
+                        var pointA = document.getElementById('start').value;
+                        var pointB = document.getElementById('end').value;
+                        var url = `http://www.mapquestapi.com/directions/v2/route?key=AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk&from=${pointA}&to=${pointB}`;
+                        oReq.open("GET", url);
+                        oReq.send();
+                        e.preventDefault();
+                    })
+                
+                
+//                    $("form").submit(function(e){
+//                    //var qString = $(this).serialize();
+//                    var pointA = document.getElementById('start').value;
+//                    var pointB = document.getElementById('end').value;
+//                    var qString = `http://www.mapquestapi.com/directions/v2/route?key=AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk&from=${pointA}&to=${pointB}`
+//                console.log(qString);
+//                e.preventDefault();
+//                })
             
             
             
