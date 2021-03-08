@@ -12,6 +12,7 @@
 
         window.onload = function() {
         L.mapquest.key = 'AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk';
+        //L.mapquest.geocoding().geocode(['New York, NY'], showMap);
 
         // 'map' refers to a <div> element with the ID map
         var map = L.mapquest.map('map', {
@@ -22,6 +23,14 @@
 
         //search controls
         let searchControl = L.mapquest.searchControl().addTo(map);
+            
+        var pointA = document.getElementById('start').value;
+        var pointB = document.getElementById('end').value;
+            
+        L.mapquest.directions().route({
+        start: 'Juhu, Mumbai',
+        end: 'Khar road, Mumbai'
+        });
         
         //marker
         L.marker([19.0699, 72.8397202], {
@@ -51,10 +60,14 @@
 		<form>
 			<div class="section">
 				<div class="type">
-<!--					<label for="start">destination</label> -->
+					<label for="start">Start</label> 
 					<input type="text" id="start" name="start">
 				</div>
-				<!-- <button>Submit</button> -->
+                <div class="type">
+					<label for="end">End</label> 
+					<input type="text" id="end" name="end">
+				</div>
+				 <button>Submit</button> 
 			</div>
 			<div class="button">
 				<button><a target="blank" href="role.html">Submit</a></button>
