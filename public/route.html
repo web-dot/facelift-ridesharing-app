@@ -3,6 +3,45 @@
 <head>
 	<title>route</title>
 	<link rel="stylesheet" type="text/css" href="route.css">
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    <link rel="stylesheet" href="style.css">
+    <script>
+      // 1. The basic part of the example
+      var L;
+
+        window.onload = function() {
+        L.mapquest.key = 'AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk';
+
+        // 'map' refers to a <div> element with the ID map
+        var map = L.mapquest.map('map', {
+          center: [19.0699, 72.8397202],
+          layers: L.mapquest.tileLayer('light'),
+          zoom: 13
+        });
+
+        //search controls
+        let searchControl = L.mapquest.searchControl().addTo(map);
+        
+        //marker
+        L.marker([19.0699, 72.8397202], {
+        icon: L.mapquest.icons.marker({
+        primaryColor: '#22408F',
+        secondaryColor: '#3B5998',
+        shadow: true,
+        size: 'md',
+        symbol: 'A'
+        })
+      })
+      .bindPopup('This is Mumbai!')
+      .addTo(map);
+
+      //control set
+      map.addControl(L.mapquest.control({ position: 'bottomright' }));
+
+    }
+
+    </script>
 </head>
 <body>
 	<div class="title">
@@ -23,5 +62,11 @@
 			
 		</form>
 	</section>
+    <div class="titlebox">
+            <!-- <div class="inputbox">
+            <input type="search" id="place-search-input" placeholder="Start Searching..."/>
+            </div> -->
+    </div>
+    <div id="map"></div>
 </body>
 </html>
