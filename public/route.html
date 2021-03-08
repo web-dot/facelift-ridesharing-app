@@ -4,51 +4,65 @@
 	<title>route</title>
 	<link rel="stylesheet" type="text/css" href="route.css">
     <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
     <link rel="stylesheet" href="style.css">
     <script>
       // 1. The basic part of the example
-      var L;
+          var L;
 
-        window.onload = function() {
-        L.mapquest.key = 'AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk';
-        //L.mapquest.geocoding().geocode(['New York, NY'], showMap);
+            window.onload = function() {
+                    L.mapquest.key = 'AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk';
+                    //L.mapquest.geocoding().geocode(['New York, NY'], showMap);
 
-        // 'map' refers to a <div> element with the ID map
-        var map = L.mapquest.map('map', {
-          center: [19.0699, 72.8397202],
-          layers: L.mapquest.tileLayer('light'),
-          zoom: 13
-        });
+                    // 'map' refers to a <div> element with the ID map
+                    var map = L.mapquest.map('map', {
+                      center: [19.0699, 72.8397202],
+                      layers: L.mapquest.tileLayer('light'),
+                      zoom: 13
+                    });
 
-        //search controls
-        let searchControl = L.mapquest.searchControl().addTo(map);
+                    //search controls
+                    let searchControl = L.mapquest.searchControl().addTo(map);
+
+
+                    L.mapquest.directions().route({
+                    start: [19.0699, 72.8397202],
+                    end: [18.9220, 72.8347]
+                    });
+
+                    //marker
+                    L.marker([19.0699, 72.8397202], {
+                    icon: L.mapquest.icons.marker({
+                    primaryColor: '#22408F',
+                    secondaryColor: '#3B5998',
+                    shadow: true,
+                    size: 'md',
+                    symbol: 'M'
+                    })
+                  })
+                  .bindPopup('This is Mumbai!')
+                  .addTo(map);
+
+                  //control set
+                  map.addControl(L.mapquest.control({ position: 'bottomright' }));
+                    //var pointA = document.getElementById('start').value;
+                    //var pointB = document.getElementById('end').value;
+                    $("form").submit(function(e){
+                    //var qString = $(this).serialize();
+                    var pointA = document.getElementById('start').value;
+                    var pointB = document.getElementById('end').value;
+                    var qString = `http://www.mapquestapi.com/directions/v2/route?key=AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk&from=${pointA}&to=${pointB}`
+                console.log(qString);
+                e.preventDefault();
+                })
             
-        var pointA = document.getElementById('start').value;
-        var pointB = document.getElementById('end').value;
             
-        L.mapquest.directions().route({
-        start: 'Juhu, Mumbai',
-        end: 'Khar road, Mumbai'
-        });
-        
-        //marker
-        L.marker([19.0699, 72.8397202], {
-        icon: L.mapquest.icons.marker({
-        primaryColor: '#22408F',
-        secondaryColor: '#3B5998',
-        shadow: true,
-        size: 'md',
-        symbol: 'A'
-        })
-      })
-      .bindPopup('This is Mumbai!')
-      .addTo(map);
-
-      //control set
-      map.addControl(L.mapquest.control({ position: 'bottomright' }));
+            
 
     }
+        
+ 
 
     </script>
 </head>
