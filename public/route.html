@@ -27,8 +27,8 @@
 
 
                     L.mapquest.directions().route({
-                    start: [19.0699, 72.8397202],
-                    end: [18.9220, 72.8347]
+                    start: [startLat, startLng],
+                    end: [endLat, endLng]
                     });
 
                     //marker
@@ -50,7 +50,18 @@
                     var form = document.querySelector('form');
                     form.addEventListener('submit', function(e){
                          function reqListener () {
-                        console.log(this.responseText);
+                             var response = this.response;
+                             var jsonString = JSON.parse(response);
+                        console.log(jsonString.route.locations[0]["latLng"]["lat"]);
+                        console.log(jsonString.route.locations[0]["latLng"]["lng"]);
+                        console.log(jsonString.route.locations[1]["latLng"]["lat"]);
+                        console.log(jsonString.route.locations[1]["latLng"]["lng"]);
+                             
+                             var startLat = jsonString.route.locations[0]["latLng"]["lat"];
+                             var startLng = jsonString.route.locations[0]["latLng"]["lng"];
+                             
+                             var endLat = jsonString.route.locations[1]["latLng"]["lat"];
+                             var endLng = jsonString.route.locations[1]["latLng"]["lng"]
                         }
                 
                         var oReq = new XMLHttpRequest();
