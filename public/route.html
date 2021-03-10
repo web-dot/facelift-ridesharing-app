@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="style.css">
     <script>
       // 1. The basic part of the example
-          var L;
+                    var L;
 
-            window.onload = function() {
+                    window.onload = function() {
                     L.mapquest.key = 'AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk';
                     //L.mapquest.geocoding().geocode(['New York, NY'], showMap);
 
@@ -26,10 +26,10 @@
                     let searchControl = L.mapquest.searchControl().addTo(map);
 
 
-                    L.mapquest.directions().route({
-                    start: [startLat, startLng],
-                    end: [endLat, endLng]
-                    });
+//                    L.mapquest.directions().route({
+//                    start: [startLat, startLng],
+//                    end: [endLat, endLng]
+//                    });
 
                     //marker
                     L.marker([19.0699, 72.8397202], {
@@ -49,29 +49,34 @@
                       
                     var form = document.querySelector('form');
                     form.addEventListener('submit', function(e){
-                         function reqListener () {
-                             var response = this.response;
-                             var jsonString = JSON.parse(response);
-                        console.log(jsonString.route.locations[0]["latLng"]["lat"]);
-                        console.log(jsonString.route.locations[0]["latLng"]["lng"]);
-                        console.log(jsonString.route.locations[1]["latLng"]["lat"]);
-                        console.log(jsonString.route.locations[1]["latLng"]["lng"]);
+                    function reqListener () {
+                    var response = this.response;
+                    var jsonString = JSON.parse(response);
+                    console.log(jsonString.route.locations[0]["latLng"]["lat"]);
+                    console.log(jsonString.route.locations[0]["latLng"]["lng"]);
+                    console.log(jsonString.route.locations[1]["latLng"]["lat"]);
+                    console.log(jsonString.route.locations[1]["latLng"]["lng"]);
                              
-                             var startLat = jsonString.route.locations[0]["latLng"]["lat"];
-                             var startLng = jsonString.route.locations[0]["latLng"]["lng"];
+                    var startLat = jsonString.route.locations[0]["latLng"]["lat"];
+                    var startLng = jsonString.route.locations[0]["latLng"]["lng"];
                              
-                             var endLat = jsonString.route.locations[1]["latLng"]["lat"];
-                             var endLng = jsonString.route.locations[1]["latLng"]["lng"]
-                        }
+                    var endLat = jsonString.route.locations[1]["latLng"]["lat"];
+                    var endLng = jsonString.route.locations[1]["latLng"]["lng"]
+                    
+                    L.mapquest.directions().route({
+                    start: [startLat, startLng],
+                    end: [endLat, endLng]
+                    });
+                    }
                 
-                        var oReq = new XMLHttpRequest();
-                        oReq.addEventListener("load", reqListener);
-                        var pointA = document.getElementById('start').value;
-                        var pointB = document.getElementById('end').value;
-                        var url = `https://www.mapquestapi.com/directions/v2/route?key=AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk&from=${pointA}&to=${pointB}`;
-                        oReq.open("GET", url);
-                        oReq.send();
-                        e.preventDefault();
+                    var oReq = new XMLHttpRequest();
+                    oReq.addEventListener("load", reqListener);
+                    var pointA = document.getElementById('start').value;
+                    var pointB = document.getElementById('end').value;
+                    var url = `https://www.mapquestapi.com/directions/v2/route?key=AIrenHUqkIDX4avAqz4NvbBeLm7h5TYk&from=${pointA}&to=${pointB}`;
+                    oReq.open("GET", url);
+                    oReq.send();
+                    e.preventDefault();
                     })
                 
                 
@@ -110,9 +115,11 @@
 				</div>
 				 <button>Submit</button> 
 			</div>
+<!--
 			<div class="button">
 				<button><a target="blank" href="role.html">Submit</a></button>
 			</div>
+-->
 			
 		</form>
 	</section>
