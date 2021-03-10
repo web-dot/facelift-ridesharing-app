@@ -43,4 +43,12 @@ button{
 #map{
     margin-top: 20px;
 }
+.routebtn{
+    width: 30%;
+	height: 50px;
+	background:#f9ca24; 
+	border-radius: 10px;
+	border: none;
+	font-family: 'Oswald', sans-serif;
+}
 
